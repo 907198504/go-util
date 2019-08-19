@@ -3,7 +3,9 @@ package fileutil
 import (
 	"bufio"
 	"io"
+	"io/ioutil"
 	"os"
+	"strings"
 )
 
 // 换行符
@@ -29,6 +31,32 @@ func ReadFileLine(filePath string) {
 		if err != nil || io.EOF == err {
 			break
 		}
+	}
+}
+
+/**
+按行读取文件，返回list
+*/
+func ReadLineAsSlice(filePath string, spiltChar string) []string {
+	file, err := ioutil.ReadFile(filePath)
+	// 处理异常
+	if err != nil {
+		panic(err)
+	}
+	str := string(file)
+	// 分割字符串
+	return strings.Split(str, spiltChar)
+}
+
+/**
+向文件后追加内容
+*/
+func AppendToFile(filePath string, content []byte) {
+	// 追加内容
+	err := ioutil.WriteFile(filePath, content, os.ModeAppend)
+	//
+	if err != nil {
+		panic(err)
 	}
 }
 
