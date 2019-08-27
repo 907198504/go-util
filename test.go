@@ -1,7 +1,9 @@
 package main
 
-import "github.com/go-util/util/dateutil"
+import (
+	"github.com/go-util/util/httputil"
+)
 
 func main() {
-	println(dateutil.CurrentTimeNanos())
+	httputil.StartHttpServer()
 }
